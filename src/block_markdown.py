@@ -1,12 +1,12 @@
 from enum import Enum
 
 class BlockType(Enum):
-    paragraph = "paragraph"
-    heading = "heading"
-    code = "code"
-    quote = "quote"
-    unordered_list = "unordered_list"
-    ordered_list = "ordered_list"
+    PARAGRAPH = "paragraph"
+    HEADING = "heading"
+    CODE = "code"
+    QUOTE = "quote"
+    ULIST = "unordered_list"
+    OLIST = "ordered_list"
 
 
 def markdown_to_blocks(markdown):
@@ -23,9 +23,9 @@ def block_to_block_type(markdown):
     headings_list = ["# ", "## ", "### ", "#### ","##### ", "###### "]
     for i in range(len(headings_list)):
         if headings_list[i] == markdown[:i+2]:
-            return BlockType.heading
+            return BlockType.HEADING
     if markdown[:3] == "```" and markdown[-3:] == "```":
-        return BlockType.code
+        return BlockType.CODE
     
     lines_list = markdown.split("\n")
     quote_check = True
@@ -33,20 +33,20 @@ def block_to_block_type(markdown):
         if i[0] != ">":
             quote_check = False
     if quote_check == True:
-        return BlockType.quote
+        return BlockType.QUOTE
     
     unordered_list_check = True
     for i in lines_list:
         if i[:2] != "- ":
             unordered_list_check = False
     if unordered_list_check == True:
-        return BlockType.unordered_list
+        return BlockType.ULIST
     
     ordered_list_check = True
     for i in range(len(lines_list)):
         if lines_list[i][:3] != str(i+1) + ". ":
             ordered_list_check = False
     if ordered_list_check == True:
-        return BlockType.ordered_list
+        return BlockType.OLIST
 
-    return BlockType.paragraph
+    return BlockType.PARAGRAPH
