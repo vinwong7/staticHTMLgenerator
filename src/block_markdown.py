@@ -131,6 +131,7 @@ def quote_node(block):
     block_text = " ".join(block.split("\n>"))
     #beginning text wouldn't have the new line, so take it out manually
     block_text = block_text[1:]
+    block_text = block_text.strip()
     base_node.children = text_to_children(block_text)
     return base_node
 
