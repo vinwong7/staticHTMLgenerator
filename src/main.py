@@ -1,14 +1,19 @@
 from copystatic import copy_files_walk
 from generate_page import generate_page_recursive
-
+import sys
 
 def main():
-    static_path = "./static"
-    public_path = "./public"
-  
-    copy_files_walk(static_path, public_path)
+    basepath = "/"
+    if len(sys.argv) > 1:
+        basepath = sys.argv[1]
+        
 
-    generate_page_recursive("./content", "template.html", "./public")
+    static_path = "./static"
+    docs_path = "./docs"
+  
+    copy_files_walk(static_path, docs_path)
+
+    generate_page_recursive("./content", "template.html", docs_path, basepath)
 
 
 main()
