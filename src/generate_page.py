@@ -50,26 +50,7 @@ def generate_page_recursive(dir_path_content, template_path, dest_dir_path):
         dest_path = os.path.join(dest_dir_path,filename)
 
         if os.path.isfile(from_path):
-            md_file = open(from_path, "r")
-            md = md_file.read()
-
-            template_file = open(template_path, "r")
-            template = template_file.read()
-
-            md_html = markdown_to_html_node(md).to_html()
-            title = extract_title(md)
-
-            template = template.replace("{{ Title }}", title)
-            template = template.replace("{{ Content }}", md_html)
-
-            dest_path_dir = os.path.dirname(dest_path)
-            if os.path.exists(dest_path_dir) is False:
-                 os.makedirs(dest_path_dir)
-
             html_name = dest_path[:-2] + "html"
-
-            f = open(html_name, "w")
-            f.write(template)
-       
+            generate_page(from_path, template_path, html_name)
         else:
             generate_page_recursive(from_path, template_path, dest_path)
