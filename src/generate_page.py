@@ -1,7 +1,6 @@
 import os
-import shutil
 from block_markdown import markdown_to_html_node
-from htmlnode import ParentNode
+from pathlib import Path
 
 def extract_title(markdown):
     block_list = markdown.split("\n\n")
@@ -52,7 +51,7 @@ def generate_page_recursive(dir_path_content, template_path, dest_dir_path, base
         dest_path = os.path.join(dest_dir_path,filename)
 
         if os.path.isfile(from_path):
-            html_name = dest_path[:-2] + "html"
+            html_name = Path(dest_path).with_suffix(".html")
             generate_page(from_path, template_path, html_name, basepath)
         else:
             generate_page_recursive(from_path, template_path, dest_path, basepath)
