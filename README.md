@@ -1,3 +1,3 @@
 # staticHTMLgenerator
 
-2nd project in Boot.dev
+3rd project in Boot.dev - converting markdown files into HTML
